@@ -37,52 +37,48 @@ function chooseExpences() {
 
 chooseExpences();
 
-/*for(let doneCount = 0; doneCount < 2; )
-{
-    let expName = prompt("Введите обязательную статью расходов в этом месяце");
-    let cost = prompt("Во сколько обойдется?");   
-    
-    if(typeof(expName) != null && expName != "" &&
-        typeof(cost != null) && cost != "") {
-            appData.expenses[expName] =  cost;
-            doneCount++;
-        }
-}*/
+function detectDayBudget() {
+    appData.moneyPerDay = (appData.budget / 30).toFixed();
 
-/*let doneCount = 0;
-while( doneCount < 2)
-{
-    let expName = prompt("Введите обязательную статью расходов в этом месяце");
-    let cost = prompt("Во сколько обойдется?");   
-    
-    if(typeof(expName) != null && expName != "" &&
-        typeof(cost != null) && cost != "") {
-            appData.expenses[expName] =  cost;
-            doneCount++;
-        }
-}*/
-
-appData.moneyPerDay = (appData.budget / 30).toFixed();
-
-alert("Ежедневный бюджет: " + appData.moneyPerDay);
-
-if (appData.moneyPerDay < 100) {
-    alert("Минимальный уровень достатка");
-} else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
-    alert("Средний уровень достатка");
-} else if (appData.moneyPerDay > 2000) {
-    alert("Високий уровень достатка");
-} else {
-    alert("Произошла ошибка");
+    alert("Ежедневный бюджет: " + appData.moneyPerDay);
 }
 
+detectDayBudget();
+
+function detectLevel() {
+    if (appData.moneyPerDay < 100) {
+        alert("Минимальный уровень достатка");
+    } else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
+        alert("Средний уровень достатка");
+    } else if (appData.moneyPerDay > 2000) {
+        alert("Високий уровень достатка");
+    } else {
+        alert("Произошла ошибка");
+    }
+}
+
+detectLevel();
+
+function chooseOptExpenses() {
+    for( let i = 0; i < 3; i++) {
+        let optExpName = prompt("Статья необязательных расходов?", '');
+
+        if (typeof (optExpName) != null && optExpName != "" ) {
+            appData.optionalExpenses[i] = optExpName;
+        } else {
+            i--;
+        }
+    }
+}
+
+chooseOptExpenses();
 
 function checkSavings() {
     if (appData.savings == true) {
         let save = +prompt("Какова сума накоплений?", ''),
             percent = +prompt("Под какой процент?");
-        
-        appData.monthIncome = save / 100 /12 * percent;
+
+        appData.monthIncome = save / 100 / 12 * percent;
         alert("Доход в месяц с вашего депощита: " + appData.monthIncome.toFixed(2));
     }
 }
