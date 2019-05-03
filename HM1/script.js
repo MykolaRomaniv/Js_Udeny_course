@@ -10,6 +10,9 @@ function start() {
     } while (isNaN(money) || money == "" || money == null); //TODO: secure date    
 }
 
+// TODO function getFromUser(str, question)
+
+
 start();
 
 let appData = {
@@ -65,6 +68,28 @@ let appData = {
     
             appData.monthIncome = save / 100 / 12 * percent;
             alert("Доход в месяц с вашего депощита: " + appData.monthIncome.toFixed(2));
+        }
+    },
+    chooseIncome: function() {
+        let items;
+        
+        do {
+            items = prompt("Что принесет допольнительный доход? (Перечислите через запятую)", "");
+        } while (!isNaN(items) || items == "" || items == null);
+
+        appData.income = items.split(', ');
+        //appData.income.push(prompt("Может что-то еще?", ""));
+        appData.income.sort();
+        
+        alert("Способы доп. заработка: ");
+        appData.income.forEach(function (item, i) {
+            alert((i + 1) + ": " + item );
+        });
+    },
+    showData: function() {
+        console.log("Наша программа включает в себя данные: ");
+        for (let key in this) {
+            console.log(key + ": " + this[key]);
         }
     }
 };
